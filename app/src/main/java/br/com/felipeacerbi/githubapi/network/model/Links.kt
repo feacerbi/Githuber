@@ -1,4 +1,4 @@
-package br.com.felipeacerbi.githubapi.repository.dtomodels
+package br.com.felipeacerbi.githubapi.network.model
 
 import com.squareup.moshi.Json
 data class Links(

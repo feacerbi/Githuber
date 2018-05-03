@@ -39,6 +39,11 @@
   public *;
 }
 
+# Kotlin Coroutines
+-keepclassmembernames class kotlinx.** {
+    volatile <fields>;
+}
+
 #OkHttp
 -dontwarn okhttp3.**
 -dontwarn okio.**

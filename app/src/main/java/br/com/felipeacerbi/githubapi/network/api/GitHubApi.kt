@@ -1,7 +1,7 @@
-package br.com.felipeacerbi.githubapi.repository.network
+package br.com.felipeacerbi.githubapi.network.api
 
-import br.com.felipeacerbi.githubapi.repository.dtomodels.PullsResponse
-import br.com.felipeacerbi.githubapi.repository.dtomodels.ReposResponse
+import br.com.felipeacerbi.githubapi.network.model.PullsResponse
+import br.com.felipeacerbi.githubapi.network.model.ReposResponse
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path

@@ -1,6 +1,7 @@
-package br.com.felipeacerbi.githubapi.repository.network
+package br.com.felipeacerbi.githubapi.network.di
 
 import br.com.felipeacerbi.githubapi.BuildConfig
+import br.com.felipeacerbi.githubapi.network.api.GitHubApi
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides

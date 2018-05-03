@@ -1,7 +1,7 @@
-package br.com.felipeacerbi.githubapi.repository.dtomodels
+package br.com.felipeacerbi.githubapi.network.model
 
 import com.squareup.moshi.Json
-data class Head(
+data class Base(
     @Json(name = "label") val label: String,
     @Json(name = "ref") val ref: String,
     @Json(name = "sha") val sha: String,

@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.2.30'
+    ext.kotlin_version = '1.2.41'
     repositories {
         google()
         jcenter()
@@ -20,6 +20,8 @@ allprojects {
     ext.set("retrofitVersion", '2.3.0')
     ext.set("daggerVersion", '2.10')
     ext.set("okhttpVersion", '3.10.0')
+    ext.set("archVersion", '1.1.1')
+    ext.set("coroutinesVersion", '0.22.5')
 
     repositories {
         google()
