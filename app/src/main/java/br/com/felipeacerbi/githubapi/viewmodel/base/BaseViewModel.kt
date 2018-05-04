@@ -3,9 +3,10 @@ package br.com.felipeacerbi.githubapi.viewmodel.base
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import br.com.felipeacerbi.githubapi.interactors.base.BaseUseCase.Result
+import br.com.felipeacerbi.githubapi.interactors.base.UseCase
 
 abstract class BaseViewModel(
+        private val useCase: UseCase,
         val state: MutableLiveData<State> = MutableLiveData()
 ) : ViewModel() {
 
@@ -16,15 +17,10 @@ abstract class BaseViewModel(
         object ShowError : State()
     }
 
-    fun onItemsFetched(result: Result?) {
-        when(result) {
-            is Result.OnSuccess<*> -> {
-                state.value = State.ItemsLoaded(result.items)
-                state.value = State.ShowContent
-            }
-            is Result.OnError -> state.value = State.ShowError
-        }
-    }
+    fun getState(): LiveData<State> = state
 
-    abstract fun getState(): LiveData<State>
+    override fun onCleared() {
+        useCase.cleanUp()
+        super.onCleared()
+    }
 }
