@@ -29,12 +29,20 @@ dependencies {
     // Android Support
     implementation "com.android.support:animated-vector-drawable:$supportVersion"
     implementation "com.android.support:appcompat-v7:$supportVersion"
+    implementation "com.android.support:cardview-v7:$supportVersion"
+    implementation "com.android.support:design:$supportVersion"
+    implementation "com.android.support:recyclerview-v7:$supportVersion"
     implementation "com.android.support:support-media-compat:$supportVersion"
     implementation "com.android.support:support-v4:$supportVersion"
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
 
     // Dagger2
     implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+
+    // Dagger Android
+    implementation "com.google.dagger:dagger-android:$daggerVersion"
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
     annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
 
