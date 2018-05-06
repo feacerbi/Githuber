@@ -1,8 +1,7 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 27
@@ -38,19 +37,19 @@ dependencies {
 
     // Dagger2
     implementation "com.google.dagger:dagger:$daggerVersion"
-    implementation 'com.android.support:recyclerview-v7:27.1.1'
-    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
 
     // Dagger Android
     implementation "com.google.dagger:dagger-android:$daggerVersion"
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
-    annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
 
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.5.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.4.0'
+    kapt 'com.github.bumptech.glide:compiler:4.4.0'
 
     // Kotlin & Coroutines
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
@@ -58,7 +57,7 @@ dependencies {
     // Lifecycle
     implementation "android.arch.lifecycle:runtime:$archVersion"
     implementation "android.arch.lifecycle:extensions:$archVersion"
-    annotationProcessor "android.arch.lifecycle:compiler:$archVersion"
+    kapt "android.arch.lifecycle:compiler:$archVersion"
 
     // Moshi
     implementation 'com.squareup.moshi:moshi-kotlin:1.5.0'
@@ -67,6 +66,10 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
     testImplementation "com.squareup.okhttp3:mockwebserver:$okhttpVersion"
+
+    // Parceler
+    implementation "org.parceler:parceler-api:$parcelerVersion"
+    kapt "org.parceler:parceler:$parcelerVersion"
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"

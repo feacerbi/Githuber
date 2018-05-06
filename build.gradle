@@ -4,6 +4,7 @@ buildscript {
     ext.kotlin_version = '1.2.41'
     repositories {
         google()
+        mavenCentral()
         jcenter()
     }
     dependencies {
@@ -18,13 +19,15 @@ buildscript {
 allprojects {
     ext.set("supportVersion", '27.1.1')
     ext.set("retrofitVersion", '2.3.0')
-    ext.set("daggerVersion", '2.12')
+    ext.set("daggerVersion", '2.13')
     ext.set("okhttpVersion", '3.10.0')
     ext.set("archVersion", '1.1.1')
     ext.set("coroutinesVersion", '0.22.5')
+    ext.set("parcelerVersion", '1.1.9')
 
     repositories {
         google()
+        mavenCentral()
         jcenter()
     }
 }

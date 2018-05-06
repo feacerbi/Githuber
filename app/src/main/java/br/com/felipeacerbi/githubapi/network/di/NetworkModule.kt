@@ -5,10 +5,13 @@ import br.com.felipeacerbi.githubapi.network.api.GitHubApi
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
+import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.CallAdapter
 import retrofit2.Converter
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
@@ -33,10 +36,15 @@ class NetworkModule {
 
     @Provides
     @Singleton
+    fun provideCallAdapterFactory(): CallAdapter.Factory = RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io())
+
+    @Provides
+    @Singleton
     fun provideGitHubApi(builder: Retrofit.Builder,
                          okHttpBuilder: OkHttpClient.Builder,
                          httpLoggingInterceptor: HttpLoggingInterceptor,
-                         converterFactory: Converter.Factory): GitHubApi {
+                         converterFactory: Converter.Factory,
+                         callAdapterFactory: CallAdapter.Factory): GitHubApi {
 
         if (BuildConfig.DEBUG) {
             httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -46,6 +54,7 @@ class NetworkModule {
         return builder.client(okHttpBuilder.build())
                 .baseUrl(BuildConfig.API_BASE_URL)
                 .addConverterFactory(converterFactory)
+                .addCallAdapterFactory(callAdapterFactory)
                 .build()
                 .create(GitHubApi::class.java)
     }

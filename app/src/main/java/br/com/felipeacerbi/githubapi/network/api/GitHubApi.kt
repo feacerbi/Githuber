@@ -12,7 +12,7 @@ interface GitHubApi {
     @GET("/search/repositories?sort=stars")
     fun fetchRepos(@Query("q") lang: String, @Query("page") page: Int): Single<ReposResponse>
 
-    @GET("/repos/{owner}/{repo}/pulls")
-    fun fetchPulls(@Path("owner") owner: String, @Path("repo") repo: String): Single<List<PullsResponse>>
+    @GET("/repos/{owner}/{repository}/pulls")
+    fun fetchPulls(@Path("owner") owner: String, @Path("repository") repo: String): Single<List<PullsResponse>>
 
 }

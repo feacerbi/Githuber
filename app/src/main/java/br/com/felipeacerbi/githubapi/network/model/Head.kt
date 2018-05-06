@@ -6,5 +6,5 @@ data class Head(
     @Json(name = "ref") val ref: String,
     @Json(name = "sha") val sha: String,
     @Json(name = "user") val user: User,
-    @Json(name = "repo") val repo: Repo
+    @Json(name = "repository") val repository: Repository
 )
