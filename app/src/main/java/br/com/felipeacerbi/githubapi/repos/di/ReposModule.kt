@@ -4,6 +4,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import br.com.felipeacerbi.githubapi.app.di.ActivityScope
+import br.com.felipeacerbi.githubapi.base.viewmodel.BaseViewModel.State
 import br.com.felipeacerbi.githubapi.repos.di.ReposModule.*
 import br.com.felipeacerbi.githubapi.repos.interactors.ReposUseCase
 import br.com.felipeacerbi.githubapi.repos.interactors.ReposUseCaseImpl
@@ -15,6 +16,8 @@ import br.com.felipeacerbi.githubapi.repos.viewmodel.ReposViewModel.Action
 import br.com.felipeacerbi.githubapi.repos.viewmodel.ReposViewModelFactory
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.experimental.android.UI
+import kotlin.coroutines.experimental.CoroutineContext
 
 @Module(includes = [
     Repository::class,
@@ -45,6 +48,14 @@ class ReposModule {
         fun provideReposViewModel(activity: ReposActivity, factory: ReposViewModelFactory): ReposViewModel {
             return ViewModelProviders.of(activity, factory).get(ReposViewModel::class.java)
         }
+
+        @Provides
+        @ActivityScope
+        fun provideStateLiveData(): MutableLiveData<State> = MutableLiveData()
+
+        @Provides
+        @ActivityScope
+        fun provideCoroutineContext(): CoroutineContext = UI
     }
 
     @Module

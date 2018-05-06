@@ -14,7 +14,7 @@ abstract class BaseUseCase (
         object OnError : Result()
     }
 
-    private fun Disposable.addToPool() = pool.add(this)
+    fun Disposable.addToPool() = pool.add(this)
 
     suspend fun <T> Single<List<T>>.retrieve(): Result = suspendCoroutine { continuation ->
         subscribe(

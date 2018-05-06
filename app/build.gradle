@@ -65,7 +65,6 @@ dependencies {
     // OkHttp
     implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
-    testImplementation "com.squareup.okhttp3:mockwebserver:$okhttpVersion"
 
     // Parceler
     implementation "org.parceler:parceler-api:$parcelerVersion"
@@ -81,7 +80,15 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
 
     // Testing
+    // JUnit
     testImplementation 'junit:junit:4.12'
+    // Architecture Components
+    testImplementation "android.arch.core:core-testing:$archVersion"
+    // Mockito
+    testImplementation "com.squareup.okhttp3:mockwebserver:$okhttpVersion"
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
+    testImplementation "org.mockito:mockito-inline:$mockitoVersion"
+    // Espresso
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     androidTestImplementation "com.android.support:support-annotations:$supportVersion"
