@@ -6,11 +6,11 @@ import org.parceler.Parcel
 
 @Parcel
 data class Repo(
-        val name: String = "",
-        val description: String = "",
-        val authorUsername: String = "",
-        val authorPhoto: String = "",
-        val stars: Int = 0,
-        val forks: Int = 0,
+        val name: String? = "",
+        val description: String? = "",
+        val authorUsername: String? = "",
+        val authorPhoto: String? = "",
+        val stars: Int? = 0,
+        val forks: Int? = 0,
         override val type: Int = Constants.ITEM_VIEWTYPE
 ) : ItemView

@@ -30,6 +30,15 @@ abstract class BaseListAdapter : RecyclerView.Adapter<BaseViewHolder<ItemView>>(
         notifyItemRangeChanged(initPosition, itemsList.size + 1)
     }
 
+    fun clearItems() {
+        val size = itemCount
+
+        itemsList.clear()
+        notifyItemRangeRemoved(0, size)
+
+        itemsList.add(loadingItem)
+    }
+
     private fun getLastPosition() = if(itemsList.lastIndex == -1) 0 else itemsList.lastIndex
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<ItemView> =

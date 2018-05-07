@@ -21,8 +21,7 @@ class ReposViewModelImpl (
 
                 reposUseCase.execute(action.language, action.page).let {
                     onReposFetched(it)
-                }
-            }
+                } }
         }
     }
 

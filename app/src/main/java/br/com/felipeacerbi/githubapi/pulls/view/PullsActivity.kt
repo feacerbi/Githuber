@@ -1,55 +1,29 @@
 package br.com.felipeacerbi.githubapi.pulls.view
 
 import android.os.Bundle
+import android.support.v7.widget.Toolbar
 import br.com.felipeacerbi.githubapi.R
 import br.com.felipeacerbi.githubapi.base.view.BaseActivity
-import br.com.felipeacerbi.githubapi.base.viewmodel.BaseViewModel.State
-import br.com.felipeacerbi.githubapi.pulls.model.Pull
-import br.com.felipeacerbi.githubapi.pulls.view.adapter.PullsAdapter
-import br.com.felipeacerbi.githubapi.pulls.viewmodel.PullsViewModel
-import br.com.felipeacerbi.githubapi.pulls.viewmodel.PullsViewModel.Action
-import br.com.felipeacerbi.githubapi.pulls.viewmodel.PullsViewModel.Action.FetchPulls
 import br.com.felipeacerbi.githubapi.repos.model.Repo
-import br.com.felipeacerbi.githubapi.utils.observe
+import br.com.felipeacerbi.githubapi.utils.transact
+import kotlinx.android.synthetic.main.activity_pulls.*
 import org.parceler.Parcels
-import javax.inject.Inject
 
-class PullsActivity(override val layoutResourceId: Int = R.layout.activity_main) : BaseActivity() {
-
-    @Inject lateinit var pullsViewModel: PullsViewModel
-    @Inject lateinit var pullsAdapter: PullsAdapter
+class PullsActivity(override val layoutResourceId: Int = R.layout.activity_pulls) : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getExtras()
-        startObservers()
 
         val repo = getExtras()
-        if(repo != null) {
-            onAction(FetchPulls(repo.authorUsername, repo.name))
-        } else TODO("Show error")
+        transact(PullsListFragment.newInstance(repo), R.id.fl_container)
+
+        toolbar.setNavigationOnClickListener { onBackPressed() }
+        toolbar.title = repo?.name
     }
-
-    private fun startObservers() {
-        observe(pullsViewModel.state, {
-            when(it) {
-                is State.ShowLoading -> { TODO() }
-                is State.ItemsLoaded<*> -> { pullsAdapter.addItems(it.items.map { it as Pull }) }
-                is State.ShowContent -> { TODO() }
-                is State.ShowError -> { TODO("Show error") }
-            }
-        })
-
-        observe(pullsAdapter.getAction(), {
-            when(it) {
-                is Action.ClickPull -> TODO("Open URL")
-            }
-        })
-    }
-
-    private fun onAction(action: Action) = pullsViewModel.performAction(action)
 
     private fun getExtras(): Repo? = Parcels.unwrap(intent.extras?.getParcelable(EXTRA_REPO))
+
+    override fun getToolbarView(): Toolbar?  = toolbar
 
     companion object {
         const val EXTRA_REPO = "extra_repo"

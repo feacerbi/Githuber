@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/list"
-    android:name="br.com.felipeacerbi.githubapi.view.ReposFragment"
+    android:id="@+id/sr_refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-    tools:context="br.com.felipeacerbi.githubapi.repos.view.ReposFragment"
-    tools:listitem="@layout/fragment_item" />
+    android:backgroundTint="@color/colorAccent">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        tools:listitem="@layout/pull_list_item" />
+</android.support.v4.widget.SwipeRefreshLayout>

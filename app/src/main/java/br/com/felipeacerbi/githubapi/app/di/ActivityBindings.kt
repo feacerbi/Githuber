@@ -11,10 +11,10 @@ import dagger.android.ContributesAndroidInjector
 abstract class ActivityBindings {
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = [ReposModule::class, FragmentBindings::class])
+    @ContributesAndroidInjector(modules = [ReposModule::class, ReposFragmentBindings::class])
     abstract fun bindReposActivity(): ReposActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = [PullsModule::class])
+    @ContributesAndroidInjector(modules = [PullsModule::class, PullsFragmentBindings::class])
     abstract fun bindPullsActivity(): PullsActivity
 }

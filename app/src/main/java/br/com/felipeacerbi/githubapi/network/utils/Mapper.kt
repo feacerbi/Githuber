@@ -26,7 +26,8 @@ class Mapper @Inject constructor() {
                     it.body,
                     it.user.login,
                     it.user.avatarUrl,
-                    it.createdAt
+                    it.createdAt,
+                    it.htmlUrl
             )
         }
     }

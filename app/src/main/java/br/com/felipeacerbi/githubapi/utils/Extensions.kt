@@ -1,14 +1,20 @@
 package br.com.felipeacerbi.githubapi.utils
 
+import android.app.Activity
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.content.Intent
+import android.os.Bundle
 import android.os.Parcelable
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlin.reflect.KClass
 
 fun <T> LifecycleOwner.observe(liveData: LiveData<T>, action: (t: T) -> Unit) {
@@ -45,4 +51,34 @@ fun <T : Any> Fragment.launchActivityWithExtras(
     } else {
         startActivity(intent)
     }
+}
+
+fun AppCompatActivity.transact(fragment: Fragment, container: Int, bundle: Bundle? = null, tag: String = "") {
+    val transaction = supportFragmentManager.beginTransaction()
+
+    if(bundle != null) fragment.arguments = bundle
+
+    transaction.add(container, fragment, tag)
+    transaction.commit()
+}
+
+fun ImageView.loadGlide(uri: String, error: Int, placeHolder: Int) {
+    if (context != null) {
+        return
+    }
+    if (context is Activity) {
+        val activity = context as Activity?
+        if (activity!!.isDestroyed || activity.isFinishing) {
+            return
+        }
+    }
+
+    Glide.with(context)
+            .load(uri)
+            .apply(RequestOptions
+                    .centerCropTransform()
+                    .error(error)
+                    .placeholder(placeHolder)
+            )
+            .into(this)
 }

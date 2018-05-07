@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">android_test_v1</string>
+    <string name="app_name">GitHubber</string>
+    <string name="user_avatar_cd">User avatar</string>
+    <string name="star_count_icon_cd">Star count icon</string>
+    <string name="forks_count_icon_cd">Forks count icon</string>
+    <string name="title_activity_repos">ReposActivity</string>
+    <string name="tab_text_1">Java</string>
+    <string name="tab_text_2">Javascript</string>
+    <string name="tab_text_3">Node.js</string>
+    <string name="action_settings">Settings</string>
+    <string name="error_loading_message">Error loading</string>
+    <string name="retry_snackbar_button">Retry</string>
 </resources>
