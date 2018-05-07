@@ -4,9 +4,11 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import br.com.felipeacerbi.githubapi.repos.view.ReposListFragment
 
-class SectionsPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
+class SectionsPagerAdapter(private val fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
 
-    override fun getItem(position: Int) = ReposListFragment.newInstance(tabs[position].language)
+    override fun getItem(position: Int) =
+            fragmentManager.findFragmentByTag(getPageTitle(position)) ?:
+            ReposListFragment.newInstance(tabs[position].language)
 
     override fun getPageTitle(position: Int) = tabs[position].title
 

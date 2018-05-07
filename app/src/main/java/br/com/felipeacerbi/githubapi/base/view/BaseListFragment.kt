@@ -30,6 +30,7 @@ abstract class BaseListFragment : DaggerFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        sr_refresh.isRefreshing = true
         startObservers()
         request()
     }

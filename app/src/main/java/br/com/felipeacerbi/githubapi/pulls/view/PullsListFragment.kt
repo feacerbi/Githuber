@@ -46,7 +46,9 @@ class PullsListFragment : BaseListFragment() {
 
     private fun openBrowserUrl(url: String) {
         val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-        startActivity(browserIntent)
+        if (browserIntent.resolveActivity(activity?.packageManager) != null) {
+            startActivity(browserIntent)
+        }
     }
 
     private fun onAction(action: Action) = pullsViewModel.performAction(action)

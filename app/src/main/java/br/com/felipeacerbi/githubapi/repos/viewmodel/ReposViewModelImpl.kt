@@ -38,4 +38,9 @@ class ReposViewModelImpl (
     override fun performAction(action: Action) {
         actor.offer(action)
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        actor.close()
+    }
 }

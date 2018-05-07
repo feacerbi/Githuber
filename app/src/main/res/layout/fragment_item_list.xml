@@ -12,6 +12,7 @@
         android:id="@+id/rv_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layoutAnimation="@anim/layout_fade_in"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         tools:listitem="@layout/pull_list_item" />
 </android.support.v4.widget.SwipeRefreshLayout>

@@ -15,7 +15,7 @@ class PullsActivity(override val layoutResourceId: Int = R.layout.activity_pulls
         super.onCreate(savedInstanceState)
 
         val repo = getExtras()
-        transact(PullsListFragment.newInstance(repo), R.id.fl_container)
+        transact(PullsListFragment.newInstance(repo), R.id.fl_container, PULLS_FRAG_TAG)
 
         toolbar.setNavigationOnClickListener { onBackPressed() }
         toolbar.title = repo?.name
@@ -27,5 +27,6 @@ class PullsActivity(override val layoutResourceId: Int = R.layout.activity_pulls
 
     companion object {
         const val EXTRA_REPO = "extra_repo"
+        const val PULLS_FRAG_TAG = "pulls_frag"
     }
 }

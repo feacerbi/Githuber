@@ -53,12 +53,14 @@ fun <T : Any> Fragment.launchActivityWithExtras(
     }
 }
 
-fun AppCompatActivity.transact(fragment: Fragment, container: Int, bundle: Bundle? = null, tag: String = "") {
+fun AppCompatActivity.transact(fragment: Fragment, container: Int, tag: String, bundle: Bundle? = null) {
     val transaction = supportFragmentManager.beginTransaction()
 
-    if(bundle != null) fragment.arguments = bundle
+    val addFragment = supportFragmentManager.findFragmentByTag(tag) ?: fragment
 
-    transaction.add(container, fragment, tag)
+    if(bundle != null) addFragment.arguments = bundle
+
+    transaction.replace(container, addFragment, tag)
     transaction.commit()
 }
 
