@@ -18,7 +18,7 @@ class PullsActivity(override val layoutResourceId: Int = R.layout.activity_pulls
         transact(PullsListFragment.newInstance(repo), R.id.fl_container, PULLS_FRAG_TAG)
 
         toolbar.setNavigationOnClickListener { onBackPressed() }
-        toolbar.title = repo?.name
+        toolbar.title = String.format("Pulls - %s", repo?.name)
     }
 
     private fun getExtras(): Repo? = Parcels.unwrap(intent.extras?.getParcelable(EXTRA_REPO))

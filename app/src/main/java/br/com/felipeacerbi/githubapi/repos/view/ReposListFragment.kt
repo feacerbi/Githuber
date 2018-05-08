@@ -25,7 +25,7 @@ class ReposListFragment : BaseListFragment() {
         observe(reposViewModel.state, {
             when(it) {
                 is State.ShowLoading -> { showLoading() }
-                is State.ItemsLoaded<*> -> { onItemsLoaded(it.items.map { it as Repo }) }
+                is State.ItemsLoaded<*> -> { onItemsLoaded(it.items.map { it as Repo }, true) }
                 is State.ShowContent -> { showContent() }
                 is State.ShowError -> { showError() }
             }
@@ -46,6 +46,8 @@ class ReposListFragment : BaseListFragment() {
     override fun request() {
         onAction(Action.FetchRepos(arguments?.getString(ARG_LANGUAGE)?: "", page++))
     }
+
+    override fun isInfinite() = true
 
     override fun showRefreshed() {
         page = 1

@@ -3,6 +3,8 @@ package br.com.felipeacerbi.githubapi.pulls.view
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
+import br.com.felipeacerbi.githubapi.R
 import br.com.felipeacerbi.githubapi.base.view.BaseListFragment
 import br.com.felipeacerbi.githubapi.base.view.adapter.BaseListAdapter
 import br.com.felipeacerbi.githubapi.base.viewmodel.BaseViewModel.State
@@ -31,7 +33,7 @@ class PullsListFragment : BaseListFragment() {
         observe(pullsViewModel.state, {
             when(it) {
                 is State.ShowLoading -> { showLoading() }
-                is State.ItemsLoaded<*> -> { onItemsLoaded(it.items.map { it as Pull }) }
+                is State.ItemsLoaded<*> -> { onItemsLoaded(it.items.map { it as Pull }, false) }
                 is State.ShowContent -> { showContent() }
                 is State.ShowError -> { showError() }
             }
@@ -48,6 +50,8 @@ class PullsListFragment : BaseListFragment() {
         val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         if (browserIntent.resolveActivity(activity?.packageManager) != null) {
             startActivity(browserIntent)
+        } else {
+            Toast.makeText(activity, getString(R.string.open_url_error_message), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -56,6 +60,8 @@ class PullsListFragment : BaseListFragment() {
     override fun request() {
         onAction(Action.FetchPulls(repo.authorUsername ?: "", repo.name ?: ""))
     }
+
+    override fun isInfinite() = false
 
     override fun getAdapter(): BaseListAdapter = adapter
 

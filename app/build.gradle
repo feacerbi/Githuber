@@ -92,8 +92,10 @@ dependencies {
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
     testImplementation "org.mockito:mockito-inline:$mockitoVersion"
     // Espresso
+    androidTestImplementation "com.android.support.test:rules:1.0.2"
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$espressoVersion"
     androidTestImplementation "com.android.support:support-annotations:$supportVersion"
     compileOnly 'org.glassfish:javax.annotation:10.0-b28'
 }

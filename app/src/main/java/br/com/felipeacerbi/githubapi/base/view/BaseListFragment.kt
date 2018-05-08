@@ -20,7 +20,7 @@ abstract class BaseListFragment : DaggerFragment() {
 
         with(view) {
             rv_list.adapter = getAdapter()
-            rv_list.addOnScrollListener(InfiniteScrollListener(::request, rv_list.layoutManager))
+            if(isInfinite()) rv_list.addOnScrollListener(InfiniteScrollListener(::request, rv_list.layoutManager))
 
             sr_refresh.setOnRefreshListener { showRefreshed() }
         }
@@ -28,8 +28,8 @@ abstract class BaseListFragment : DaggerFragment() {
         return view
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         sr_refresh.isRefreshing = true
         startObservers()
         request()
@@ -41,6 +41,8 @@ abstract class BaseListFragment : DaggerFragment() {
 
     abstract fun request()
 
+    abstract fun isInfinite(): Boolean
+
     private fun getErrorBar(view: View) =
             Snackbar.make(view, getString(R.string.error_loading_message), Snackbar.LENGTH_INDEFINITE)
                 .setAction(getString(R.string.retry_snackbar_button), { request() })
@@ -49,8 +51,12 @@ abstract class BaseListFragment : DaggerFragment() {
         // Not needed
     }
 
-    fun onItemsLoaded(items: List<ItemView>) {
-        getAdapter().addItems(items)
+    fun onItemsLoaded(items: List<ItemView>, infinite: Boolean) {
+        val animate = getAdapter().isEmpty()
+
+        getAdapter().addItems(items, infinite)
+
+        if(animate) rv_list.scheduleLayoutAnimation()
     }
 
     fun showContent() {

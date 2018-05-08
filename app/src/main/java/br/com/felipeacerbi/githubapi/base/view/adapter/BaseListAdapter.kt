@@ -15,7 +15,7 @@ abstract class BaseListAdapter : RecyclerView.Adapter<BaseViewHolder<ItemView>>(
             get() = Constants.LOADING_VIEWTYPE
     }
 
-    fun addItems(items: List<ItemView>) {
+    fun addItems(items: List<ItemView>, infinite: Boolean) {
         val initPosition = getLastPosition()
 
         if(itemsList.isNotEmpty()) {
@@ -24,7 +24,7 @@ abstract class BaseListAdapter : RecyclerView.Adapter<BaseViewHolder<ItemView>>(
         }
 
         itemsList.addAll(items)
-        itemsList.add(loadingItem)
+        if(infinite) itemsList.add(loadingItem)
         notifyItemRangeInserted(initPosition, itemsList.size + 1)
     }
 
@@ -34,6 +34,8 @@ abstract class BaseListAdapter : RecyclerView.Adapter<BaseViewHolder<ItemView>>(
         itemsList.clear()
         notifyItemRangeRemoved(0, size)
     }
+
+    fun isEmpty() = itemsList.isEmpty()
 
     private fun getLastPosition() = if(itemsList.lastIndex == -1) 0 else itemsList.lastIndex
 

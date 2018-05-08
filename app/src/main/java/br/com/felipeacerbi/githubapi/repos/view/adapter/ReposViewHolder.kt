@@ -17,7 +17,7 @@ class ReposViewHolder(itemView: View,
         container.setOnClickListener { actionLiveData.value = Action.ClickRepo(item) }
         with(itemView) {
             tv_repo_name.text = item.name
-            tv_repo_description.text = item.description
+            tv_repo_description.text = String.format(" - %s", item.description)
             tv_repo_username.text = item.authorUsername
             tv_repo_stars.text = item.stars.toString()
             tv_repo_forks.text = item.forks.toString()

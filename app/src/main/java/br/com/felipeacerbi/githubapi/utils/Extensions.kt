@@ -15,6 +15,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.reflect.KClass
 
 fun <T> LifecycleOwner.observe(liveData: LiveData<T>, action: (t: T) -> Unit) {
@@ -83,4 +85,13 @@ fun ImageView.loadGlide(uri: String, error: Int, placeHolder: Int) {
                     .placeholder(placeHolder)
             )
             .into(this)
+}
+
+fun String.toFormattedDate(currentFormat: String, newFormat: String): String {
+    val currentDateFormat = SimpleDateFormat(currentFormat, Locale.getDefault())
+    val newDateFormat = SimpleDateFormat(newFormat, Locale.getDefault())
+
+    val currentDate = currentDateFormat.parse(this)
+
+    return newDateFormat.format(currentDate.time)
 }
